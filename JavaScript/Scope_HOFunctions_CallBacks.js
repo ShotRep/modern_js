@@ -141,19 +141,20 @@
 //   console.log("Katherine is a grumpus");
 // }
 // setTimeout(grumpus, 1000);
+
 // //same just a dif way of writing it.
 // setTimeout(function () {
 //   console.log("Katherine is a major grumpus!");
 // }, 2000);
 
-function grumpus() {
-  console.log("Katherine is a grumpus");
-}
+// function grumpus() {
+//   console.log("Katherine is a grumpus");
+// }
 // const btn = document.querySelector("button");
 // btn.addEventListener("click", grumpus);
 
-const btn = document.querySelector("button");
-btn.addEventListener("click", function () {
-  //<=anonymous function instead
-  alert("I said don't click me!");
-});
+// const btn = document.querySelector("button");
+// btn.addEventListener("click", function () {
+//   //<=anonymous function instead
+//   alert("I said don't click me!");
+// });
