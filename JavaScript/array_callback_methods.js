@@ -314,13 +314,207 @@ every
 // });
 // console.log(grades);
 
-let grades = [89, 96, 58, 77, 62, 93, 81, 99, 73].reduce((max, currVal) => {
-  return Math.max(max, currVal);
-});
-console.log(grades);
+// let grades = [89, 96, 58, 77, 62, 93, 81, 99, 73].reduce((max, currVal) => {
+//   return Math.max(max, currVal);
+// });
+// console.log(grades);
 
-//Starting point
-const sum = [10, 20, 30, 40, 50].reduce((sum, currVal) => {
-  return sum + currVal;
-});
-console.log(sum);
+// //Specifying an INITIAL value.  A starting number other than 0.
+// const sum = [10, 20, 30, 40, 50].reduce((sum, currVal) => {
+//   return sum + currVal;
+// }, 10);
+// console.log(sum);
+
+// const votes = [
+//   "y",
+//   "y",
+//   "n",
+//   "y",
+//   "n",
+//   "y",
+//   "absent",
+//   "n",
+//   "y",
+//   "n",
+//   "n",
+//   "n",
+//   "y",
+//   "y",
+// ];
+
+// const results = votes.reduce((tally, currentVote) => {
+//   if (tally[currentVote]) {
+//     tally[currentVote]++;
+//   } else {
+//     tally[currentVote] = 1;
+//   }
+//   return tally;
+// }, {});
+// console.log(results);
+
+//easier cleaner way
+
+const votes = [
+  "y",
+  "y",
+  "n",
+  "y",
+  "n",
+  "y",
+  "absent",
+  "n",
+  "y",
+  "n",
+  "n",
+  "n",
+  "y",
+  "y",
+];
+
+const results = votes.reduce((tally, currentVote) => {
+  tally[currentVote] = (tally[currentVote] || 0) + 1;
+  return tally;
+}, {});
+console.log(results);
+
+////STEP BY STEP COMMENTED VERSION BY A PROGRAMMER/////
+
+// This is a classic example of frequency counter pattern - accumulation of different values.
+
+// tally[val]
+// The above uses bracket notation syntax to access value under particular property key inside of an object.  It permits the use of dynamic variables
+
+// Let us start by looking at the reduce method :
+
+// It consists of   mandatory accumulator function  and an optional initializer value.
+
+// The purpose of this function is to act upon current value in the array, subsequently returning it as an accumulated value for the next iteration.
+
+// Initializer value simply refers to the starting value of the accumulative process.. If omitted, the starting value would point to the very first element inside the array which reduce is being applied to.
+
+// So, let us step through the example from the lecture:
+//============================================================
+
+// const votes = [
+//   "y",
+//   "n",
+//   "y",
+//   "n",
+//   "n",
+//   "n",
+//   "n",
+//   "y",
+//   "y",
+//   "n",
+//   "y",
+//   "n",
+//   "y",
+//   "n",
+// ];
+
+// votes.reduce((intermediaryValues, currentValue) => {
+//   if (intermediaryValues[currentValue]) {
+//     intermediaryValues[currentValue]++;
+//   } else {
+//     intermediaryValues[currentValue] = 1;
+//   }
+//   return intermediaryValues;
+// }, {});
+
+//====================================================================
+
+// When we substitute actual values, we get the following:
+
+// First iteration :
+// IntermediaryValues === {} (since it is defined as the starting point value)
+// current value  ==== ' y' (very first element inside of our array
+// votes.reduce(({}, "y")=>{......},{});
+
+// IF  our  accumulator object (intermediaryValues)  presently contains  value at key of 'y'  THEN   increment  that value by 1 (y++);
+
+//     if(intermediaryValues[currentValue]){
+
+//         intermediaryValues[currentValue]++
+
+//       }
+
+// ELSE , set value at key "y" to 1 to signify first occurrence of the letter;
+
+//     else {
+//       intermediaryValues[currentValue] = 1;
+//     }
+
+// Consequently, return the   return "intermediaryValues" accumulator object to be used in the next iteration .
+
+// SECOND ITERATION :
+
+// IntermediaryValues === {y:1}  ---> since it has been returned from the previous iteration cycle
+
+// current value  ==== ' n' (second element inside of our array)
+// votes.reduce(({y:1}, "n")=>{......},{});
+
+// IF  our  accumulator object (intermediaryValues)  presently contains  value at key of 'n'  THEN   increment  that value by 1 (n++);
+
+//     if(intermediaryValues[currentValue]){
+
+//         intermediaryValues[currentValue]++
+
+//       }
+
+// ELSE , set value at key "n" to 1 to signify first occurrence of the letter;
+
+//     else {
+//       intermediaryValues[currentValue] = 1;
+//     }
+
+// Consequently, return the   return "intermediaryValues" accumulator object to be used in the next iteration .
+
+// THIRD ITERATION :
+
+// IntermediaryValues === {y:1, n:1}  ---> since it has been returned from the previous iteration cycle
+
+// current value  ==== ' y' (third element inside of our array)
+// votes.reduce(({y:1, n:1}, "y")=>{......},{});
+
+// IF  our  accumulator object (intermediaryValues)  presently contains  value at key of 'y'  THEN   increment  that value by 1 (y++);
+
+//     if(intermediaryValues[currentValue]){ <--- y key exists,
+
+//         intermediaryValues[currentValue]++  <--- value under "y" is incremented by 1
+
+//       }
+
+// ELSE , set value at key "y" to 1 to signify first occurrence of the letter;
+
+//     else {
+//       intermediaryValues[currentValue] = 1;
+//     }
+
+// Consequently, return the   return "intermediaryValues" accumulator object to be used in the next iteration .
+
+// FOURTH ITERATION :
+
+// IntermediaryValues === {y:2, n:1}  ---> since it has been returned from the previous iteration cycle
+
+// current value  ==== ' n' (fourthelement inside of our array)
+// votes.reduce(({y:2, n:1}, "n")=>{......},{});
+
+// IF  our  accumulator object (intermediaryValues)  presently contains  value at key of 'y'  THEN   increment  that value by 1 (y++);
+
+//     if(intermediaryValues[currentValue]){ <--- n key exists,
+
+//         intermediaryValues[currentValue]++  <--- value under "n" is incremented by 1
+
+//       }
+
+// ELSE , set value at key "y" to 1 to signify first occurrence of the letter;
+
+//     else {
+//       intermediaryValues[currentValue] = 1;
+//     }
+
+// Consequently, return the   return "intermediaryValues" accumulator object to be used in the next iteration .
+
+// The process shall continue until ALL values found inside of our array are processed.
+
+// Since you are only dealing with 2 values - Y   - N , the ELSE condition will only execute for the very first occurrence of  each letter)
