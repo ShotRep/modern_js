@@ -53,27 +53,67 @@
 //using rest to contain the remaining keys we didn't use.
 // const { first, last, ...other } = runner;
 
-//NESTED Destructuring
-const results = [
-  {
-    first: "Eliud",
-    last: "Kipchoge",
-    country: "Kenya",
-  },
-  {
-    first: "Feyisa",
-    last: "Lilesa",
-    country: "Ethiopia",
-  },
-  {
-    first: "Galen",
-    last: "Rupp",
-    country: "United States",
-  },
-]
+//    NESTED Destructuring
+// const results = [
+//   {
+//     first: "Eliud",
+//     last: "Kipchoge",
+//     country: "Kenya",
+//   },
+//   {
+//     first: "Feyisa",
+//     last: "Lilesa",
+//     country: "Ethiopia",
+//   },
+//   {
+//     first: "Galen",
+//     last: "Rupp",
+//     country: "United States",
+//   },
+// ]
 
 // const [{first, last}, {country}] = results
 
 // changing key value to a variable name.
-const [{first: goldWinner}, {first: silverWinner}, {first: bronzeWinner}] =
-  results
+// const [{first: goldWinner}, {first: silverWinner}, {first: bronzeWinner}] =
+//   results
+
+//PARAM Destructuring
+//inside a function definition where the parameters are listed.
+// so we can use this for all above while in a function.
+
+const runner = {
+  first: "Eliud",
+  last: "Kipchoge",
+  country: "Kenya",
+  title: "Elder of the Order of the Golden Heart of Kenya",
+}
+
+// Rather than destructuring INSIDE the function body
+// with object
+// function print(person) {
+//   const {
+//     first,
+//     last,
+//     title
+//   } = person;
+//   console.log(`${first} ${last}, ${title}`)
+// }
+
+// We can unpack the values we want right in the parameter list:
+
+function print({first, last, title}) {
+  console.log(`${first} ${last}, ${title}`)
+}
+print(runner)
+
+//array example
+const response = ["HTTP/1.1", "200 OK", "application/json"]
+
+// Also works with array parameters:
+function parseResponse([protocol, statusCode, contentType]) {
+  console.log(`Protocol: ${protocol}`)
+  console.log(`Status: ${statusCode}`)
+  console.log(`Content: ${contentType}`)
+}
+parseResponse(response)
