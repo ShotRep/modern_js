@@ -61,7 +61,10 @@ const myDeck = {
   values: "2,3,4,5,6,7,8,9,10,Jack,Queen,King,Ace",
   // values: [2, 3, 4, 5, 6, 7, 8, 9, 10, "Jack", "Queen", "King", "Ace"],
   initializeDeck() {
-    const {suits, values, deck} = this
+    // const suits = this.suits
+    // const values = this.values
+    // const deck = this.deck
+    const {suits, values, deck} = this //<= this.suits, this.values, this.deck (destructuring)
     for (let value of values.split(",")) {
       for (let suit of suits) {
         deck.push({
@@ -70,7 +73,7 @@ const myDeck = {
         })
       }
     }
-    return deck
+    return deck //<=we do not have to return deck like we did above, optional.
   },
   drawCard() {
     const card = this.deck.pop()
@@ -90,17 +93,17 @@ const myDeck = {
     for (let i = deck.length - 1; i > 0; i--) {
       //pick random index before current element
       let j = Math.floor(Math.random() * (i + 1))
-      //swap
+      //       //swap
       ;[deck[i], deck[j]] = [deck[j], deck[i]]
     }
   },
 }
 
-// Much cleaner!!
+// // Much cleaner!!
 myDeck.initializeDeck()
 myDeck.shuffle()
 const h1 = myDeck.drawMultiple(2)
 // const h2 = myDeck.drawMultiple(2)
 // const h3 = myDeck.drawMultiple(5)
 
-//////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
