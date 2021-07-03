@@ -1,0 +1,6 @@
+const h1 = document.querySelector("h1")
+const ul = document.querySelector("ul")
+const firstLi = document.querySelector("li")
+const inputs = document.querySelectorAll("input")
+const form = document.querySelector("form")
+const range = document.querySelector('input[type="range"]')
