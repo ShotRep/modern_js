@@ -109,9 +109,35 @@ for (let game of warriorsGames) {
 
   //create li's per game
   const gameLI = document.createElement("li")
-  //add game info to new li
-  gameLI.innerText = `${awayTeam.team} @ ${homeTeam.team}`
+
+  //destructuring for below
+  const {team: hTeam, points: hPoints} = homeTeam
+  const {team: aTeam, points: aPoints} = awayTeam
+
+  //add team names to new li
+  teamNames = `${aTeam} @ ${hTeam}`
+  // //add game.scores to new li
+  // gamePoints = `${aPoints} - ${hPoints}`      changing how we show scores(below)
+
+  //compare points and bold winner instead of just showing scores (above)
+  let gamePoints
+  if (aPoints > hPoints) {
+    gamePoints = `<b><i>${aPoints}</i></b> - ${hPoints}`
+  } else {
+    gamePoints = `${aPoints} - <b><i>${hPoints}</i></b>`
+  }
+
+  //find if warriors won or lost and color with css class
+  const warriors = hTeam === "Golden State" ? homeTeam : awayTeam
+  gameLI.classList.add(warriors.isWinner ? "win" : "loss")
+  console.log(warriors)
+  gameLI.innerHTML = `${teamNames} ${gamePoints}`
+
+  // add team names + team scores to one line
+  gameLI.innerHTML = `${teamNames} ${gamePoints}` //using innerHTML vs text here because of bold tags
+
   //append new li with game info to ul
   newUL.appendChild(gameLI)
-  console.log(homeTeam.team, awayTeam.team)
 }
+
+document.body.prepend(newUL)
